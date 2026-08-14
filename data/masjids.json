@@ -1,0 +1,182 @@
+[
+  {
+    "id": "collectorshah-masjid",
+    "name": "Masjid Collectorshah",
+    "area": "Maulviganj",
+    "address": "Ganga Prasad Road, Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854016,
+    "lng": 80.9243823,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "4:30 AM",
+      "zohar": "2:00 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:50 PM",
+      "isha": "9:00 PM",
+      "jummah": "1:00 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "masjid-khawas",
+    "name": "Masjid Khawas",
+    "area": "Maulviganj",
+    "address": "Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854016,
+    "lng": 80.9243823,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "4:55 AM",
+      "zohar": "12:45 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:50 PM",
+      "isha": "8:30 PM",
+      "jummah": "12:45 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "masjid-gulab-shah",
+    "name": "Masjid Gulab Shah",
+    "area": "Aminabad",
+    "address": "Opposite Aminabad Inter College, Aminabad, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.8487,
+    "lng": 80.927,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "5:05 AM",
+      "zohar": "1:15 PM",
+      "asr": "5:30 PM",
+      "maghrib": "6:51 PM",
+      "isha": "8:50 PM",
+      "jummah": "1:20 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "masjid-zia-ul-islam",
+    "name": "Masjid Zia-ul-Islam",
+    "area": "Aminabad",
+    "address": "Kaccha Hata, Aminabad, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.8487,
+    "lng": 80.927,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "5:15 AM",
+      "zohar": "1:45 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:49 PM",
+      "isha": "8:45 PM",
+      "jummah": "12:45 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "dhaniya-merry-masjid",
+    "name": "Dhaniya Merry Masjid",
+    "area": "Chikmandi",
+    "address": "Chikmandi, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.8677148,
+    "lng": 80.9042142,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "4:32 AM",
+      "zohar": "12:45 PM",
+      "asr": "5:00 PM",
+      "maghrib": "6:46 PM",
+      "isha": "8:15 PM",
+      "jummah": "1:15 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "masjid-taj-muhammad",
+    "name": "Masjid Taj Muhammad (Tannuwali Masjid)",
+    "area": "Maulviganj",
+    "address": "Bhedi Mandi, Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854016,
+    "lng": 80.9243823,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "5:05 AM",
+      "zohar": "1:15 PM",
+      "asr": "5:30 PM",
+      "maghrib": "6:51 PM",
+      "isha": "9:00 PM",
+      "jummah": "1:00 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "waqf-masjid-siddiqia",
+    "name": "Waqf Masjid Siddiqia",
+    "area": "Maulviganj",
+    "address": "Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854016,
+    "lng": 80.9243823,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "5:15 AM",
+      "zohar": "1:15 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:50 PM",
+      "isha": "8:30 PM",
+      "jummah": "1:30 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "baccho-wali-masjid",
+    "name": "Baccho Wali Masjid",
+    "area": "Maulviganj",
+    "address": "Near Munna Teli, Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854016,
+    "lng": 80.9243823,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "5:10 AM",
+      "zohar": "1:30 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:50 PM",
+      "isha": "8:30 PM",
+      "jummah": "2:00 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  },
+  {
+    "id": "tehsildar-masjid",
+    "name": "Tehsildar Masjid",
+    "area": "Maulviganj",
+    "address": "Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854016,
+    "lng": 80.9243823,
+    "geoPrecision": "locality",
+    "verified": false,
+    "timings": {
+      "fajr": "5:10 AM",
+      "zohar": "1:30 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:48 PM",
+      "isha": "8:30 PM",
+      "jummah": "1:00 PM"
+    },
+    "lastUpdated": "2026-08-15"
+  }
+]

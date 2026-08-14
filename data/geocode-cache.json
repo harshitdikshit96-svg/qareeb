@@ -1,0 +1,110 @@
+{
+  "collectorshah-masjid": {
+    "query": "Masjid Collectorshah, Ganga Prasad Road, Maulviganj, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:24.173Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "masjid-khawas": {
+    "query": "Masjid Khawas, Maulviganj, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:27.398Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "masjid-gulab-shah": {
+    "query": "Masjid Gulab Shah, Opposite Aminabad Inter College, Aminabad, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:31.238Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "masjid-zia-ul-islam": {
+    "query": "Masjid Zia-ul-Islam, Kaccha Hata, Aminabad, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:35.184Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "dhaniya-merry-masjid": {
+    "query": "Dhaniya Merry Masjid, Chikmandi, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:38.810Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "masjid-taj-muhammad": {
+    "query": "Masjid Taj Muhammad (Tannuwali Masjid), Bhedi Mandi, Maulviganj, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:42.354Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "waqf-masjid-siddiqia": {
+    "query": "Waqf Masjid Siddiqia, Maulviganj, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:44.935Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "baccho-wali-masjid": {
+    "query": "Baccho Wali Masjid, Near Munna Teli, Maulviganj, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:48.418Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  },
+  "tehsildar-masjid": {
+    "query": "Tehsildar Masjid, Maulviganj, Lucknow",
+    "source": "nominatim",
+    "found": false,
+    "confident": false,
+    "lat": null,
+    "lng": null,
+    "displayName": null,
+    "osmId": null,
+    "fetchedAt": "2026-08-14T22:10:51.733Z",
+    "note": "No place_of_worship match in OSM for this name/address — needs a manual pin or a Google Places lookup."
+  }
+}
