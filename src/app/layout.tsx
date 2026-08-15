@@ -26,7 +26,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <div className="flex-1 max-w-md w-full mx-auto pb-24">{children}</div>
+        <div className="flex-1 max-w-md w-full mx-auto pb-24">
+          {children}
+          <p className="px-4 pt-8 pb-2 text-center text-[11px] text-muted">
+            Designed &amp; Developed by{" "}
+            <a
+              href="https://harshitcreates.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              harshitcreates.in
+            </a>
+          </p>
+        </div>
         <BottomNav />
       </body>
     </html>
