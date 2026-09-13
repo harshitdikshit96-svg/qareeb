@@ -5,10 +5,10 @@
     "area": "Maulviganj",
     "address": "Ganga Prasad Road, Maulviganj, Lucknow",
     "city": "Lucknow",
-    "lat": 26.854016,
-    "lng": 80.9243823,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.849747,
+    "lng": 80.920586,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "4:30 AM",
       "zohar": "2:00 PM",
@@ -17,7 +17,7 @@
       "isha": "9:00 PM",
       "jummah": "1:00 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "masjid-khawas",
@@ -25,10 +25,10 @@
     "area": "Maulviganj",
     "address": "Maulviganj, Lucknow",
     "city": "Lucknow",
-    "lat": 26.854016,
-    "lng": 80.9243823,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.849157,
+    "lng": 80.92247,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "4:55 AM",
       "zohar": "12:45 PM",
@@ -37,7 +37,7 @@
       "isha": "8:30 PM",
       "jummah": "12:45 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "masjid-gulab-shah",
@@ -45,10 +45,10 @@
     "area": "Aminabad",
     "address": "Opposite Aminabad Inter College, Aminabad, Lucknow",
     "city": "Lucknow",
-    "lat": 26.8487,
-    "lng": 80.927,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.84915,
+    "lng": 80.922501,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "5:05 AM",
       "zohar": "1:15 PM",
@@ -57,7 +57,7 @@
       "isha": "8:50 PM",
       "jummah": "1:20 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "masjid-zia-ul-islam",
@@ -65,10 +65,10 @@
     "area": "Aminabad",
     "address": "Kaccha Hata, Aminabad, Lucknow",
     "city": "Lucknow",
-    "lat": 26.8487,
-    "lng": 80.927,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.849844,
+    "lng": 80.923317,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "5:15 AM",
       "zohar": "1:45 PM",
@@ -77,7 +77,7 @@
       "isha": "8:45 PM",
       "jummah": "12:45 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "dhaniya-merry-masjid",
@@ -85,10 +85,10 @@
     "area": "Chikmandi",
     "address": "Chikmandi, Lucknow",
     "city": "Lucknow",
-    "lat": 26.8677148,
-    "lng": 80.9042142,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.849783,
+    "lng": 80.921791,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "4:32 AM",
       "zohar": "12:45 PM",
@@ -97,7 +97,7 @@
       "isha": "8:15 PM",
       "jummah": "1:15 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "masjid-taj-muhammad",
@@ -105,10 +105,10 @@
     "area": "Maulviganj",
     "address": "Bhedi Mandi, Maulviganj, Lucknow",
     "city": "Lucknow",
-    "lat": 26.854016,
-    "lng": 80.9243823,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.848488,
+    "lng": 80.920876,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "5:05 AM",
       "zohar": "1:15 PM",
@@ -117,7 +117,7 @@
       "isha": "9:00 PM",
       "jummah": "1:00 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "waqf-masjid-siddiqia",
@@ -125,10 +125,10 @@
     "area": "Maulviganj",
     "address": "Maulviganj, Lucknow",
     "city": "Lucknow",
-    "lat": 26.854016,
-    "lng": 80.9243823,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.848814,
+    "lng": 80.919907,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "5:15 AM",
       "zohar": "1:15 PM",
@@ -137,7 +137,7 @@
       "isha": "8:30 PM",
       "jummah": "1:30 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "baccho-wali-masjid",
@@ -145,10 +145,10 @@
     "area": "Maulviganj",
     "address": "Near Munna Teli, Maulviganj, Lucknow",
     "city": "Lucknow",
-    "lat": 26.854016,
-    "lng": 80.9243823,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.848558,
+    "lng": 80.920433,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "5:10 AM",
       "zohar": "1:30 PM",
@@ -157,7 +157,7 @@
       "isha": "8:30 PM",
       "jummah": "2:00 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
   },
   {
     "id": "tehsildar-masjid",
@@ -165,10 +165,10 @@
     "area": "Maulviganj",
     "address": "Maulviganj, Lucknow",
     "city": "Lucknow",
-    "lat": 26.854016,
-    "lng": 80.9243823,
-    "geoPrecision": "locality",
-    "verified": false,
+    "lat": 26.850313,
+    "lng": 80.919868,
+    "geoPrecision": "exact",
+    "verified": true,
     "timings": {
       "fajr": "5:10 AM",
       "zohar": "1:30 PM",
@@ -177,6 +177,66 @@
       "isha": "8:30 PM",
       "jummah": "1:00 PM"
     },
-    "lastUpdated": "2026-08-15"
+    "lastUpdated": "2026-09-12"
+  },
+  {
+    "id": "masjid-jamiyatul-qureysh",
+    "name": "Masjid Jamiyatul Qureysh",
+    "area": "Chikmandi",
+    "address": "Chikmandi, Maulviganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.851181,
+    "lng": 80.921806,
+    "geoPrecision": "exact",
+    "verified": true,
+    "timings": {
+      "fajr": "5:00 AM",
+      "zohar": "1:30 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:47 PM",
+      "isha": "8:45 PM",
+      "jummah": "1:08 PM"
+    },
+    "lastUpdated": "2026-09-13"
+  },
+  {
+    "id": "mecca-masjid-barood-khana",
+    "name": "Mecca Masjid",
+    "area": "Golaganj",
+    "address": "Barood Khana, Golaganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854485,
+    "lng": 80.92231,
+    "geoPrecision": "exact",
+    "verified": true,
+    "timings": {
+      "fajr": "5:00 AM",
+      "zohar": "1:30 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:47 PM",
+      "isha": "8:45 PM",
+      "jummah": "1:08 PM"
+    },
+    "lastUpdated": "2026-09-13"
+  },
+  {
+    "id": "masjid-ali-bin-abi-talib",
+    "name": "Namaz Masjid Ali bin Abi Talib",
+    "area": "Golaganj",
+    "address": "Jagat Narain Road, Golaganj, Lucknow",
+    "city": "Lucknow",
+    "lat": 26.854021,
+    "lng": 80.924858,
+    "geoPrecision": "exact",
+    "verified": true,
+    "timings": {
+      "fajr": "5:00 AM",
+      "zohar": "1:30 PM",
+      "asr": "5:15 PM",
+      "maghrib": "6:47 PM",
+      "isha": "8:45 PM",
+      "jummah": "1:08 PM"
+    },
+    "lastUpdated": "2026-09-13"
   }
 ]

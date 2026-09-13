@@ -10,8 +10,38 @@ export const PRAYER_LABELS: Record<PrayerName, string> = {
   isha: "Isha",
 };
 
+export type PrayerFilterName = PrayerName | "jummah";
+
+export const PRAYER_FILTER_LABELS: Record<PrayerFilterName, string> = {
+  ...PRAYER_LABELS,
+  jummah: "Jumu'ah",
+};
+
+export const PRAYER_FILTER_OPTIONS: PrayerFilterName[] = [
+  "fajr",
+  "zohar",
+  "asr",
+  "maghrib",
+  "isha",
+  "jummah",
+];
+
+/**
+ * Minutes (can be negative) from `now` until the given prayer's time today.
+ * Used by the "prayer" filter to show/sort masjids by an upcoming jamaat.
+ */
+export function getMsUntilPrayer(
+  timings: PrayerTimes,
+  name: PrayerFilterName,
+  now: Date = new Date()
+): number | null {
+  const time = parseTimeOnDate(timings[name], now);
+  if (!time) return null;
+  return time.getTime() - now.getTime();
+}
+
 /** Parses a "h:mm AM/PM" string against a given base date, returning a Date on that day. */
-function parseTimeOnDate(time: string, base: Date): Date | null {
+export function parseTimeOnDate(time: string, base: Date): Date | null {
   const match = time.trim().match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
   if (!match) return null;
   let hours = parseInt(match[1], 10);

@@ -19,8 +19,22 @@ export type Masjid = {
   lng: number | null;
   geoPrecision: "exact" | "locality" | null;
   verified: boolean;
+  images: string[];
   timings: PrayerTimes;
   lastUpdated: string;
 };
 
 export type MasjidWithDistance = Masjid & { distanceKm: number | null };
+
+export type MasjidInput = {
+  id?: string;
+  name: string;
+  area: string;
+  address: string;
+  city: string;
+  lat: number | null;
+  lng: number | null;
+  geoPrecision: "exact" | "locality" | null;
+  verified: boolean;
+  timings: PrayerTimes;
+};

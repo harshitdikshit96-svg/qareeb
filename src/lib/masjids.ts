@@ -1,14 +1,5 @@
-import masjidsData from "../../data/masjids.json";
 import { haversineKm } from "./distance";
 import type { Masjid, MasjidWithDistance } from "./types";
-
-export function getAllMasjids(): Masjid[] {
-  return masjidsData as Masjid[];
-}
-
-export function getMasjidById(id: string): Masjid | undefined {
-  return getAllMasjids().find((m) => m.id === id);
-}
 
 export function withDistances(
   masjids: Masjid[],

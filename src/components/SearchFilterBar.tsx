@@ -31,7 +31,7 @@ export default function SearchFilterBar({
         <button
           type="button"
           onClick={() => setShowFilters((s) => !s)}
-          aria-label="Toggle filters"
+          aria-label="Toggle area filter"
           className={`shrink-0 ${selectedArea ? "text-brand" : "text-muted"}`}
         >
           <FilterIcon />

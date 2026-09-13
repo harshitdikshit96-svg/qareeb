@@ -1,37 +1,67 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllMasjids, getMasjidById, googleMapsDirectionsUrl } from "@/lib/masjids";
+import StaleBanner from "@/components/StaleBanner";
+import { googleMapsDirectionsUrl } from "@/lib/masjids";
+import { getAllMasjidsFromDb } from "@/lib/masjidsDb";
+import { getMasjidByIdWithFallback } from "@/lib/masjidsRepo";
 import { PRAYER_LABELS } from "@/lib/prayer";
 import type { PrayerName } from "@/lib/types";
 
 const ROW_ORDER: PrayerName[] = ["fajr", "zohar", "asr", "maghrib", "isha"];
 
-export function generateStaticParams() {
-  return getAllMasjids().map((m) => ({ id: m.id }));
+export async function generateStaticParams() {
+  const masjids = await getAllMasjidsFromDb();
+  return masjids.map((m) => ({ id: m.id }));
 }
+
+export const dynamic = "force-dynamic";
 
 export default async function MasjidDetailPage({
   params,
 }: PageProps<"/masjids/[id]">) {
   const { id } = await params;
-  const masjid = getMasjidById(id);
+  const { masjid, stale } = await getMasjidByIdWithFallback(id);
   if (!masjid) notFound();
 
   return (
     <div className="px-4 pt-6 pb-4 space-y-5">
+      {stale && <StaleBanner fetchedAt={null} />}
       <Link href="/masjids" className="inline-flex items-center gap-1 text-sm text-muted">
         <BackIcon />
         All Masjids
       </Link>
 
-      <div className="rounded-3xl bg-gradient-to-br from-brand to-brand-light h-32 flex items-center justify-center">
-        <MosqueIcon />
+      <div className="relative rounded-3xl bg-gradient-to-br from-brand to-brand-light h-32 flex items-center justify-center overflow-hidden">
+        {masjid.images[0] ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={masjid.images[0]}
+            alt={masjid.name}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <MosqueIcon />
+        )}
       </div>
 
       <header>
         <h1 className="text-2xl font-semibold leading-tight">{masjid.name}</h1>
         <p className="text-muted text-sm mt-1">{masjid.address}</p>
       </header>
+
+      {masjid.images.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto -mx-4 px-4 pb-1">
+          {masjid.images.slice(1).map((src) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={src}
+              src={src}
+              alt={masjid.name}
+              className="h-20 w-20 shrink-0 rounded-xl object-cover border border-black/5"
+            />
+          ))}
+        </div>
+      )}
 
       <a
         href={googleMapsDirectionsUrl(masjid)}
