@@ -1,7 +1,5 @@
-import {
-  deleteMasjidPhotoAction,
-  uploadMasjidPhotosAction,
-} from "@/lib/adminActions";
+import { deleteMasjidPhotoAction } from "@/lib/adminActions";
+import PhotoUploader from "./PhotoUploader";
 
 export default function PhotoManager({
   masjidId,
@@ -10,8 +8,6 @@ export default function PhotoManager({
   masjidId: string;
   images: string[];
 }) {
-  const uploadAction = uploadMasjidPhotosAction.bind(null, masjidId);
-
   return (
     <div className="rounded-xl border border-black/10 p-4 space-y-4">
       <p className="text-sm font-medium">Photos</p>
@@ -47,25 +43,7 @@ export default function PhotoManager({
         <p className="text-xs text-neutral-500">No photos yet.</p>
       )}
 
-      <form action={uploadAction} className="flex items-center gap-2">
-        <input
-          type="file"
-          name="photos"
-          accept="image/jpeg,image/png,image/webp,image/gif"
-          multiple
-          className="text-xs flex-1"
-        />
-        <button
-          type="submit"
-          className="shrink-0 rounded-lg bg-emerald-700 text-white text-xs font-medium px-3 py-2"
-        >
-          Upload
-        </button>
-      </form>
-      <p className="text-[11px] text-neutral-400">
-        JPG, PNG, WEBP or GIF, up to 8MB each. You can select multiple files
-        at once.
-      </p>
+      <PhotoUploader masjidId={masjidId} />
     </div>
   );
 }

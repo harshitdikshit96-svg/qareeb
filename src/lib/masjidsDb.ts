@@ -19,7 +19,7 @@ type Row = {
   maghrib: string;
   isha: string;
   jummah: string;
-  last_updated: string;
+  last_updated: string | Date;
 };
 
 function rowToMasjid(r: Row): Masjid {
@@ -42,11 +42,15 @@ function rowToMasjid(r: Row): Masjid {
       isha: r.isha,
       jummah: r.jummah,
     },
-    lastUpdated:
-      typeof r.last_updated === "string"
-        ? r.last_updated.slice(0, 10)
-        : r.last_updated,
+    lastUpdated: formatDateValue(r.last_updated),
   };
+}
+
+function formatDateValue(value: string | Date): string {
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10);
+  }
+  return value.slice(0, 10);
 }
 
 function slugify(name: string): string {

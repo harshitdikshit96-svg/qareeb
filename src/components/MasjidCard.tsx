@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ImageCarousel from "@/components/ImageCarousel";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 import { formatDistance } from "@/lib/distance";
 import { googleMapsDirectionsUrl } from "@/lib/masjids";
@@ -20,16 +21,18 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
   return (
     <div className="relative h-full rounded-2xl bg-card shadow-sm overflow-hidden border border-black/5">
       <div className="relative h-28 bg-gradient-to-br from-brand to-brand-light flex items-center justify-center overflow-hidden">
-        {masjid.images[0] && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={masjid.images[0]}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
+        {masjid.images.length > 0 ? (
+          <ImageCarousel
+            images={masjid.images}
+            alt={masjid.name}
+            arrowSize="h-6 w-6"
+            showDots={false}
           />
+        ) : (
+          <MosqueIcon />
         )}
         {masjid.distanceKm !== null && (
-          <span className="absolute top-2 left-2 rounded-full bg-brand/80 text-white text-xs font-medium px-2.5 py-1">
+          <span className="absolute top-2 left-2 z-10 rounded-full bg-brand/80 text-white text-xs font-medium px-2.5 py-1">
             {formatDistance(masjid.distanceKm)}
           </span>
         )}
@@ -41,7 +44,6 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
         >
           <HeartIcon filled={bookmarked} />
         </button>
-        {!masjid.images[0] && <MosqueIcon />}
       </div>
       <div className="p-3">
         <p className="font-semibold text-sm leading-tight truncate">{masjid.name}</p>
