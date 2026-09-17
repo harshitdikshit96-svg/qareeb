@@ -1,4 +1,5 @@
 import { deleteMasjidPhotoAction } from "@/lib/adminActions";
+import { cloudinaryUrl } from "@/lib/cloudinaryUrl";
 import PhotoUploader from "./PhotoUploader";
 
 export default function PhotoManager({
@@ -20,7 +21,7 @@ export default function PhotoManager({
               <div key={src} className="relative group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={src}
+                  src={cloudinaryUrl(src, 240)}
                   alt=""
                   className="h-24 w-full object-cover rounded-lg border border-black/10"
                 />

@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { updateTag } from "next/cache";
 import {
   addMasjidImageInDb,
   createMasjidInDb,
@@ -11,6 +12,7 @@ import {
   removeMasjidImageInDb,
   updateMasjidInDb,
 } from "./masjidsDb";
+import { logTimingChange } from "./masjidAdminsDb";
 import { deleteMasjidPhotoByUrl, uploadMasjidPhoto } from "./cloudinary";
 import {
   ADMIN_COOKIE_MAX_AGE,
@@ -18,6 +20,7 @@ import {
   checkPassword,
   createSessionCookieValue,
 } from "./adminAuth";
+import { requireSuperAdminSession } from "./requireAdmin";
 import { resolveAndExtractLatLng } from "./googleMapsLink";
 import type { MasjidInput, PrayerTimes } from "./types";
 
@@ -81,20 +84,41 @@ function readMasjidInput(formData: FormData): MasjidInput {
   };
 }
 
+function timingsEqual(a: PrayerTimes, b: PrayerTimes): boolean {
+  return (
+    a.fajr === b.fajr &&
+    a.zohar === b.zohar &&
+    a.asr === b.asr &&
+    a.maghrib === b.maghrib &&
+    a.isha === b.isha &&
+    a.jummah === b.jummah
+  );
+}
+
 export async function createMasjidAction(formData: FormData) {
+  await requireSuperAdminSession();
   const input = readMasjidInput(formData);
   const masjid = await createMasjidInDb(input);
+  updateTag("masjids");
   redirect(`/admin/${masjid.id}/edit`);
 }
 
 export async function updateMasjidAction(id: string, formData: FormData) {
+  await requireSuperAdminSession();
   const input = readMasjidInput(formData);
+  const before = await getMasjidByIdFromDb(id);
   await updateMasjidInDb(id, input);
+  if (before && !timingsEqual(before.timings, input.timings)) {
+    await logTimingChange(id, "super:admin", before.timings, input.timings);
+  }
+  updateTag("masjids");
   redirect("/admin");
 }
 
 export async function deleteMasjidAction(id: string) {
+  await requireSuperAdminSession();
   await deleteMasjidFromDb(id);
+  updateTag("masjids");
   redirect("/admin");
 }
 
@@ -116,6 +140,8 @@ const ALLOWED_IMAGE_TYPES = new Set([
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024; // 8 MB per photo
 
 export async function uploadMasjidPhotosAction(id: string, formData: FormData) {
+  await requireSuperAdminSession();
+
   const masjid = await getMasjidByIdFromDb(id);
   if (!masjid) {
     throw new Error(`Masjid with id "${id}" not found`);
@@ -138,11 +164,14 @@ export async function uploadMasjidPhotosAction(id: string, formData: FormData) {
     await addMasjidImageInDb(id, url);
   }
 
+  updateTag("masjids");
   redirect(`/admin/${id}/edit`);
 }
 
 export async function deleteMasjidPhotoAction(id: string, imageUrl: string) {
+  await requireSuperAdminSession();
   await deleteMasjidPhotoByUrl(imageUrl);
   await removeMasjidImageInDb(id, imageUrl);
+  updateTag("masjids");
   redirect(`/admin/${id}/edit`);
 }

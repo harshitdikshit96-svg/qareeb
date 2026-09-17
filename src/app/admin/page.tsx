@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { deleteMasjidAction, listMasjidsForAdmin, logoutAction } from "@/lib/adminActions";
+import { cloudinaryUrl } from "@/lib/cloudinaryUrl";
 
 export const dynamic = "force-dynamic";
 
@@ -39,7 +40,7 @@ export default async function AdminListPage() {
                 {m.images[0] ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={m.images[0]}
+                    src={cloudinaryUrl(m.images[0], 96)}
                     alt=""
                     className="h-full w-full object-cover"
                   />

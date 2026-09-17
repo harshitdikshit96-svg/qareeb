@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
 
 export default function ImageCarousel({
   images,
@@ -44,6 +45,7 @@ export default function ImageCarousel({
       <img
         src={images[safeIndex]}
         alt={alt}
+        loading="lazy"
         onClick={
           onImageClick
             ? (e) => {
@@ -92,21 +94,5 @@ export default function ImageCarousel({
         </>
       )}
     </div>
-  );
-}
-
-function ChevronLeftIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-      <path d="m15 18-6-6 6-6" />
-    </svg>
-  );
-}
-
-function ChevronRightIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-      <path d="m9 18 6-6-6-6" />
-    </svg>
   );
 }

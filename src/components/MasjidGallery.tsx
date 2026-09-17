@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ImageCarousel from "@/components/ImageCarousel";
+import { MosqueIcon, CloseIcon } from "@/components/icons";
+import { cloudinaryUrl } from "@/lib/cloudinaryUrl";
 
 export default function MasjidGallery({
   images,
@@ -11,6 +13,12 @@ export default function MasjidGallery({
   alt: string;
 }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  // Inline gallery only needs a card-sized image; the lightbox needs a
+  // much bigger one. Requesting the right size (rather than the raw
+  // upload) cuts page weight and Cloudinary bandwidth.
+  const galleryImages = useMemo(() => images.map((src) => cloudinaryUrl(src, 800)), [images]);
+  const lightboxImages = useMemo(() => images.map((src) => cloudinaryUrl(src, 1600)), [images]);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -32,7 +40,7 @@ export default function MasjidGallery({
   if (images.length === 0) {
     return (
       <div className="relative rounded-3xl bg-gradient-to-br from-brand to-brand-light h-32 flex items-center justify-center overflow-hidden">
-        <MosqueIcon />
+        <MosqueIcon size={48} />
       </div>
     );
   }
@@ -40,7 +48,7 @@ export default function MasjidGallery({
   return (
     <>
       <ImageCarousel
-        images={images}
+        images={galleryImages}
         alt={alt}
         onImageClick={(index) => setLightboxIndex(index)}
         rootClassName="relative rounded-3xl h-56 overflow-hidden bg-gradient-to-br from-brand to-brand-light"
@@ -68,7 +76,7 @@ export default function MasjidGallery({
             onClick={(e) => e.stopPropagation()}
           >
             <ImageCarousel
-              images={images}
+              images={lightboxImages}
               alt={alt}
               initialIndex={lightboxIndex}
               fit="contain"
@@ -78,26 +86,5 @@ export default function MasjidGallery({
         </div>
       )}
     </>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M6 6 18 18M18 6 6 18" />
-    </svg>
-  );
-}
-
-function MosqueIcon() {
-  return (
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" strokeOpacity="0.85" strokeWidth="1.4">
-      <path d="M12 2c1.2 1.2 1.6 2.3.9 3.6C14.6 6.3 15.5 7.3 15.5 8.5H8.5c0-1.2.9-2.2 1.6-2.9C9.4 4.3 10.8 3.2 12 2Z" />
-      <path d="M3 21v-6a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v6" />
-      <path d="M16 21v-6a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v6" />
-      <path d="M8.5 8.5V21h7V8.5" />
-      <path d="M2 21h20" />
-      <path d="M11 13.5a1 1 0 1 1 2 0v2.5h-2v-2.5Z" />
-    </svg>
   );
 }

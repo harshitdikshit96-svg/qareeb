@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { extractLatLngAction } from "@/lib/adminActions";
+import TimingFields from "./TimingFields";
 import type { Masjid } from "@/lib/types";
 
 type Props = {
@@ -128,22 +129,7 @@ export default function MasjidForm({ masjid, action }: Props) {
 
       <div className="rounded-xl border border-black/10 p-4 space-y-3">
         <p className="text-sm font-medium">Jamaat timings</p>
-        <div className="grid grid-cols-2 gap-3">
-          <TimingField name="fajr" label="Fajr" defaultValue={masjid?.timings.fajr} />
-          <TimingField name="zohar" label="Zohar" defaultValue={masjid?.timings.zohar} />
-          <TimingField name="asr" label="Asr" defaultValue={masjid?.timings.asr} />
-          <TimingField
-            name="maghrib"
-            label="Maghrib"
-            defaultValue={masjid?.timings.maghrib}
-          />
-          <TimingField name="isha" label="Isha" defaultValue={masjid?.timings.isha} />
-          <TimingField
-            name="jummah"
-            label="Jumu'ah"
-            defaultValue={masjid?.timings.jummah}
-          />
-        </div>
+        <TimingFields timings={masjid?.timings} />
       </div>
 
       <button
@@ -152,16 +138,6 @@ export default function MasjidForm({ masjid, action }: Props) {
       >
         {masjid ? "Save changes" : "Add masjid"}
       </button>
-
-      <style jsx global>{`
-        .input {
-          width: 100%;
-          border-radius: 0.5rem;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          padding: 0.5rem 0.75rem;
-          font-size: 0.875rem;
-        }
-      `}</style>
     </form>
   );
 }
@@ -171,28 +147,6 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
     <div className="space-y-1">
       <label className="text-sm font-medium">{label}</label>
       {children}
-    </div>
-  );
-}
-
-function TimingField({
-  name,
-  label,
-  defaultValue,
-}: {
-  name: string;
-  label: string;
-  defaultValue?: string;
-}) {
-  return (
-    <div className="space-y-1">
-      <label className="text-xs text-neutral-500">{label}</label>
-      <input
-        name={name}
-        defaultValue={defaultValue}
-        placeholder="e.g. 4:30 AM"
-        className="input"
-      />
     </div>
   );
 }

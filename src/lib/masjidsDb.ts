@@ -131,6 +131,33 @@ export async function deleteMasjidFromDb(id: string): Promise<void> {
   await withRetry(() => sql()`delete from masjids where id = ${id}`);
 }
 
+/** Narrow update used by the sub-admin dashboard: only the 6 timing
+ * fields, nothing else about the masjid can change through this path. */
+export async function updateMasjidTimingsInDb(
+  id: string,
+  timings: MasjidInput["timings"]
+): Promise<Masjid> {
+  const rows = (await withRetry(() =>
+    sql()`
+    update masjids set
+      fajr = ${timings.fajr},
+      zohar = ${timings.zohar},
+      asr = ${timings.asr},
+      maghrib = ${timings.maghrib},
+      isha = ${timings.isha},
+      jummah = ${timings.jummah},
+      last_updated = current_date,
+      updated_at = now()
+    where id = ${id}
+    returning *
+  `
+  )) as Row[];
+  if (!rows[0]) {
+    throw new Error(`Masjid with id "${id}" not found`);
+  }
+  return rowToMasjid(rows[0]);
+}
+
 export async function addMasjidImageInDb(
   id: string,
   imagePath: string

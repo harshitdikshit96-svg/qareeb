@@ -38,3 +38,20 @@ export type MasjidInput = {
   verified: boolean;
   timings: PrayerTimes;
 };
+
+export type MasjidAdmin = {
+  id: string;
+  masjidId: string;
+  username: string;
+  createdAt: string;
+};
+
+export type TimingChangeLogEntry = {
+  id: number;
+  masjidId: string;
+  changedBy: string;
+  oldTimings: PrayerTimes;
+  newTimings: PrayerTimes;
+  changedAt: string;
+};
+

@@ -2,16 +2,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import MasjidForm from "@/components/admin/MasjidForm";
 import PhotoManager from "@/components/admin/PhotoManager";
+import SubAdminManager from "@/components/admin/SubAdminManager";
 import { getMasjidForAdmin, updateMasjidAction } from "@/lib/adminActions";
 
 export const dynamic = "force-dynamic";
 
 export default async function EditMasjidPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ subadmin_error?: string }>;
 }) {
   const { id } = await params;
+  const { subadmin_error } = await searchParams;
   const masjid = await getMasjidForAdmin(id);
   if (!masjid) notFound();
 
@@ -27,6 +31,10 @@ export default async function EditMasjidPage({
 
         <div className="bg-white rounded-2xl border border-black/5 p-6">
           <PhotoManager masjidId={masjid.id} images={masjid.images} />
+        </div>
+
+        <div className="bg-white rounded-2xl border border-black/5 p-6">
+          <SubAdminManager masjidId={masjid.id} errorMessage={subadmin_error} />
         </div>
 
         <div className="bg-white rounded-2xl border border-black/5 p-6">
