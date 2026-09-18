@@ -11,9 +11,7 @@ export const dynamic = "force-dynamic";
 
 export default async function MasjidAdminDashboard({
   searchParams,
-}: {
-  searchParams: Promise<{ saved?: string }>;
-}) {
+}: PageProps<"/masjid-admin">) {
   const session = await requireMasjidAdminSession();
   const { saved } = await searchParams;
   const locale = await getLocale();

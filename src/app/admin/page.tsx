@@ -10,28 +10,28 @@ export default async function AdminListPage() {
   return (
     <div className="min-h-screen bg-neutral-100">
       <div className="max-w-4xl mx-auto px-4 py-6 space-y-5">
-        <div className="flex items-center justify-between">
+        <div className="space-y-3">
           <div>
             <h1 className="text-xl font-semibold">Masjid Listings</h1>
             <p className="text-sm text-neutral-500">{masjids.length} total</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center flex-wrap gap-2">
             <Link
               href="/admin/analytics"
-              className="rounded-lg border border-black/10 text-sm font-medium px-4 py-2"
+              className="whitespace-nowrap rounded-lg border border-black/10 text-sm font-medium px-4 py-2"
             >
               Analytics
             </Link>
             <Link
               href="/admin/new"
-              className="rounded-lg bg-emerald-700 text-white text-sm font-medium px-4 py-2"
+              className="whitespace-nowrap rounded-lg bg-emerald-700 text-white text-sm font-medium px-4 py-2"
             >
               + Add masjid
             </Link>
             <form action={logoutAction}>
               <button
                 type="submit"
-                className="rounded-lg border border-black/10 text-sm px-3 py-2"
+                className="whitespace-nowrap rounded-lg border border-black/10 text-sm px-3 py-2"
               >
                 Log out
               </button>

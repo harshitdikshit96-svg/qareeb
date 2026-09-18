@@ -3,7 +3,7 @@ import { ADMIN_COOKIE_NAME, isValidSessionCookieValue } from "./lib/adminAuth";
 import { MASJID_ADMIN_COOKIE_NAME, getMasjidAdminSession } from "./lib/masjidAdminAuth";
 import { VISITOR_COOKIE_MAX_AGE, VISITOR_COOKIE_NAME } from "./lib/visitorCookie";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith("/admin") || pathname.startsWith("/api/admin")) {

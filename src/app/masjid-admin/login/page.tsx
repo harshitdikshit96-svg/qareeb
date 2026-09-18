@@ -4,10 +4,9 @@ import { masjidAdminLoginAction } from "@/lib/masjidAdminActions";
 
 export default async function MasjidAdminLoginPage({
   searchParams,
-}: {
-  searchParams: Promise<{ error?: string; next?: string }>;
-}) {
-  const { error, next } = await searchParams;
+}: PageProps<"/masjid-admin/login">) {
+  const { error, next: rawNext } = await searchParams;
+  const next = Array.isArray(rawNext) ? rawNext[0] : rawNext;
   const locale = await getLocale();
   const dict = getDictionary(locale);
 

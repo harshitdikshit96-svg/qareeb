@@ -131,7 +131,15 @@ function PinIcon() {
 
 function ChevronIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="rtl:-scale-x-100"
+    >
       <path d="m9 6 6 6-6 6" />
     </svg>
   );

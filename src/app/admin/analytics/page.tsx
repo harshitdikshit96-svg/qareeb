@@ -52,7 +52,7 @@ export default async function AdminAnalyticsPage() {
             {trend.map((d) => (
               <div
                 key={d.day}
-                className="flex-1 flex flex-col items-center justify-end gap-1"
+                className="flex-1 h-full flex flex-col items-center justify-end gap-1"
                 title={`${d.day}: ${d.pageviews} pageviews, ${d.uniqueVisitors} unique`}
               >
                 <div

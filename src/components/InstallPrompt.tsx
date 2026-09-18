@@ -5,7 +5,7 @@ import { useDictionary } from "@/lib/i18n/LocaleContext";
 import { MosqueIcon } from "@/components/icons";
 
 const DISMISSED_KEY = "qareeb_install_prompt_dismissed_at";
-const DISMISS_COOLDOWN_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
+const DISMISS_COOLDOWN_MS = 1 * 24 * 60 * 60 * 1000; // 1 day
 const SHOW_DELAY_MS = 1500;
 
 interface BeforeInstallPromptEvent extends Event {

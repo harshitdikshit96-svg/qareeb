@@ -39,12 +39,18 @@ export default function NextPrayerBanner({
     <div className="rounded-3xl bg-brand text-white p-5 shadow-lg">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-white/70 text-sm">{dict.nextPrayerBanner.nextPrayer(sourceLabel)}</p>
+          <p className="text-white/70 text-sm leading-tight">
+            {dict.nextPrayerBanner.nextPrayer(sourceLabel)}
+          </p>
           {next && (
             <>
-              <p className="text-3xl font-semibold mt-1">{dict.prayerLabels[next.name]}</p>
-              <p className="text-xl text-white/90 mt-0.5">{next.timeLabel}</p>
-              <p className="flex items-center gap-1.5 text-sm text-white/70 mt-2">
+              <p className="text-3xl font-semibold leading-tight mt-1">
+                {dict.prayerLabels[next.name]}
+              </p>
+              <p className="text-xl text-white/90 leading-tight mt-0.5">
+                <bdi>{next.timeLabel}</bdi>
+              </p>
+              <p className="flex items-center gap-1.5 text-sm text-white/70 leading-tight mt-2">
                 <ClockIcon />
                 {dict.nextPrayerBanner.remaining(formatCountdown(next.remainingMs))}
               </p>
@@ -74,8 +80,10 @@ export default function NextPrayerBanner({
                 isActive ? "bg-white text-brand font-semibold" : "text-white/80"
               }`}
             >
-              <span>{dict.prayerLabels[name]}</span>
-              <span className="text-[11px]">{timings[name]}</span>
+              <span className="leading-tight">{dict.prayerLabels[name]}</span>
+              <span className="text-[11px] leading-tight">
+                <bdi>{timings[name]}</bdi>
+              </span>
             </div>
           );
         })}

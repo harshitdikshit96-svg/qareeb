@@ -83,7 +83,9 @@ const ur: Dictionary = {
     qiblaFinder: "قبلہ فائنڈر",
   },
   masjidCard: {
-    next: (label: string, time: string) => `اگلی: ${label} ${time}`,
+    // ⁦/⁩ (LRI/PDI) isolate the LTR time string (e.g. "5:15 PM")
+    // so the Urdu bidi algorithm doesn't reorder "PM" before the time.
+    next: (label: string, time: string) => `اگلی: ${label} ⁦${time}⁩`,
     addBookmark: "بک مارک شامل کریں",
     removeBookmark: "بک مارک ہٹائیں",
     getDirections: "راستہ دیکھیں",

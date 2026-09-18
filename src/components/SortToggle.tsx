@@ -23,7 +23,7 @@ export default function SortToggle({
           type="button"
           onClick={() => onChange("distance")}
           disabled={distanceDisabled}
-          className={`px-3 py-1.5 rounded-full font-medium transition-colors disabled:opacity-40 ${
+          className={`leading-none px-3 py-1.5 rounded-full font-medium transition-colors disabled:opacity-40 ${
             value === "distance" ? "bg-brand text-white" : "text-foreground"
           }`}
         >
@@ -32,7 +32,7 @@ export default function SortToggle({
         <button
           type="button"
           onClick={() => onChange("prayer")}
-          className={`px-3 py-1.5 rounded-full font-medium transition-colors ${
+          className={`leading-none px-3 py-1.5 rounded-full font-medium transition-colors ${
             value === "prayer" ? "bg-brand text-white" : "text-foreground"
           }`}
         >

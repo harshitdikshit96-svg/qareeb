@@ -2,10 +2,9 @@ import { loginAction } from "@/lib/adminActions";
 
 export default async function AdminLoginPage({
   searchParams,
-}: {
-  searchParams: Promise<{ error?: string; next?: string }>;
-}) {
-  const { error, next } = await searchParams;
+}: PageProps<"/admin/login">) {
+  const { error, next: rawNext } = await searchParams;
+  const next = Array.isArray(rawNext) ? rawNext[0] : rawNext;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-neutral-100 px-4">

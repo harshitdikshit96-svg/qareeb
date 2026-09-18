@@ -41,15 +41,15 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
           <MosqueIcon />
         )}
         {masjid.distanceKm !== null && (
-          <span className="absolute top-2 left-2 z-10 rounded-full bg-brand/80 text-white text-xs font-medium px-2.5 py-1">
-            {formatDistance(masjid.distanceKm)}
+          <span className="absolute top-2 start-2 z-10 inline-flex items-center leading-none rounded-full bg-brand/80 text-white text-xs font-medium px-2.5 py-1">
+            <bdi>{formatDistance(masjid.distanceKm)}</bdi>
           </span>
         )}
         <button
           type="button"
           onClick={() => setBookmarked(toggleBookmark(masjid.id))}
           aria-label={bookmarked ? dict.masjidCard.removeBookmark : dict.masjidCard.addBookmark}
-          className="absolute z-10 top-2 right-2 h-7 w-7 rounded-full bg-white/90 flex items-center justify-center"
+          className="absolute z-10 top-2 end-2 h-7 w-7 rounded-full bg-white/90 flex items-center justify-center"
         >
           <HeartIcon filled={bookmarked} />
         </button>
@@ -59,9 +59,9 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
         <p className="text-muted text-xs mt-0.5 truncate">
           {masjid.area}, {masjid.city}
         </p>
-        <div className="flex items-center justify-between mt-2.5">
+        <div className="flex items-center justify-between gap-2 mt-2.5">
           {next && (
-            <span className="text-xs text-brand font-medium">
+            <span className="text-xs text-brand font-medium min-w-0 truncate">
               {dict.masjidCard.next(dict.prayerLabels[next.name], next.timeLabel)}
             </span>
           )}

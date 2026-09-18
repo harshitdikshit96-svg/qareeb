@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { getAllMasjidsFromDb, getMasjidByIdFromDb } from "./masjidsDb";
 import { getCachedMasjids, setCachedMasjids } from "./masjidsCache";
@@ -59,7 +60,10 @@ export async function getMasjidsWithFallback(): Promise<MasjidsResult> {
  * table). On failure, falls back to looking it up in the in-memory cache
  * of the last successful full-list fetch, if any.
  */
-export async function getMasjidByIdWithFallback(
+// Wrapped in React's cache() so generateMetadata and the page component
+// (both calling this with the same id in one request) share a single
+// underlying lookup instead of doubling it.
+export const getMasjidByIdWithFallback = cache(async function getMasjidByIdWithFallback(
   id: string
 ): Promise<{ masjid: Masjid | null; stale: boolean }> {
   try {
@@ -72,4 +76,4 @@ export async function getMasjidByIdWithFallback(
     }
     throw err;
   }
-}
+});

@@ -13,6 +13,17 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "15mb",
     },
   },
+  async headers() {
+    return [
+      {
+        // Never let a browser/CDN cache the service worker file itself —
+        // otherwise an updated sw.js (new CACHE_NAME, fixed fetch logic)
+        // can take up to 24h to reach clients per the PWA guide.
+        source: "/sw.js",
+        headers: [{ key: "Cache-Control", value: "no-cache, no-store, must-revalidate" }],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

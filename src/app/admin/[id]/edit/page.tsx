@@ -10,12 +10,10 @@ export const dynamic = "force-dynamic";
 export default async function EditMasjidPage({
   params,
   searchParams,
-}: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ subadmin_error?: string }>;
-}) {
+}: PageProps<"/admin/[id]/edit">) {
   const { id } = await params;
   const { subadmin_error } = await searchParams;
+  const subadminError = Array.isArray(subadmin_error) ? subadmin_error[0] : subadmin_error;
   const masjid = await getMasjidForAdmin(id);
   if (!masjid) notFound();
 
@@ -34,7 +32,7 @@ export default async function EditMasjidPage({
         </div>
 
         <div className="bg-white rounded-2xl border border-black/5 p-6">
-          <SubAdminManager masjidId={masjid.id} errorMessage={subadmin_error} />
+          <SubAdminManager masjidId={masjid.id} errorMessage={subadminError} />
         </div>
 
         <div className="bg-white rounded-2xl border border-black/5 p-6">

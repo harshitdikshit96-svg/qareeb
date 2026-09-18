@@ -12,6 +12,7 @@ export default function ImageCarousel({
   showDots = true,
   initialIndex = 0,
   fit = "cover",
+  priority = false,
 }: {
   images: string[];
   alt: string;
@@ -21,6 +22,7 @@ export default function ImageCarousel({
   showDots?: boolean;
   initialIndex?: number;
   fit?: "cover" | "contain";
+  priority?: boolean;
 }) {
   const [index, setIndex] = useState(initialIndex);
 
@@ -45,7 +47,7 @@ export default function ImageCarousel({
       <img
         src={images[safeIndex]}
         alt={alt}
-        loading="lazy"
+        loading={priority && safeIndex === 0 ? "eager" : "lazy"}
         onClick={
           onImageClick
             ? (e) => {
@@ -66,7 +68,7 @@ export default function ImageCarousel({
             type="button"
             onClick={goPrev}
             aria-label="Previous photo"
-            className={`absolute left-1.5 top-1/2 -translate-y-1/2 z-10 ${arrowSize} rounded-full bg-black/35 hover:bg-black/55 text-white flex items-center justify-center backdrop-blur-sm transition-colors`}
+            className={`absolute start-1.5 top-1/2 -translate-y-1/2 z-10 ${arrowSize} rounded-full bg-black/35 hover:bg-black/55 text-white flex items-center justify-center backdrop-blur-sm transition-colors rtl:rotate-180`}
           >
             <ChevronLeftIcon />
           </button>
@@ -74,7 +76,7 @@ export default function ImageCarousel({
             type="button"
             onClick={goNext}
             aria-label="Next photo"
-            className={`absolute right-1.5 top-1/2 -translate-y-1/2 z-10 ${arrowSize} rounded-full bg-black/35 hover:bg-black/55 text-white flex items-center justify-center backdrop-blur-sm transition-colors`}
+            className={`absolute end-1.5 top-1/2 -translate-y-1/2 z-10 ${arrowSize} rounded-full bg-black/35 hover:bg-black/55 text-white flex items-center justify-center backdrop-blur-sm transition-colors rtl:rotate-180`}
           >
             <ChevronRightIcon />
           </button>

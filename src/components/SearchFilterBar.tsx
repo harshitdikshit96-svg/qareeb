@@ -45,7 +45,7 @@ export default function SearchFilterBar({
           <button
             type="button"
             onClick={() => onAreaChange(null)}
-            className={`text-xs px-3 py-1.5 rounded-full border ${
+            className={`text-xs leading-none px-3 py-1.5 rounded-full border ${
               selectedArea === null
                 ? "bg-brand text-white border-brand"
                 : "bg-card text-foreground border-black/10"
@@ -58,7 +58,7 @@ export default function SearchFilterBar({
               key={area}
               type="button"
               onClick={() => onAreaChange(area)}
-              className={`text-xs px-3 py-1.5 rounded-full border ${
+              className={`text-xs leading-none px-3 py-1.5 rounded-full border ${
                 selectedArea === area
                   ? "bg-brand text-white border-brand"
                   : "bg-card text-foreground border-black/10"

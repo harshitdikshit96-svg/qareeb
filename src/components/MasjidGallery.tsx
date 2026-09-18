@@ -53,6 +53,7 @@ export default function MasjidGallery({
         onImageClick={(index) => setLightboxIndex(index)}
         rootClassName="relative rounded-3xl h-56 overflow-hidden bg-gradient-to-br from-brand to-brand-light"
         arrowSize="h-8 w-8"
+        priority
       />
 
       {lightboxIndex !== null && (
@@ -67,7 +68,7 @@ export default function MasjidGallery({
             type="button"
             onClick={() => setLightboxIndex(null)}
             aria-label="Close"
-            className="absolute top-4 right-4 z-20 h-9 w-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-sm"
+            className="absolute top-4 end-4 z-20 h-9 w-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center backdrop-blur-sm"
           >
             <CloseIcon />
           </button>

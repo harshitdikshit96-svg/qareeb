@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cookies, headers } from "next/headers";
 import { after } from "next/server";
+import type { Metadata } from "next";
 import MasjidGallery from "@/components/MasjidGallery";
 import { BackIcon, DirectionIcon } from "@/components/icons";
 import StaleBanner from "@/components/StaleBanner";
@@ -20,6 +21,23 @@ const ROW_ORDER: PrayerName[] = ["fajr", "zohar", "asr", "maghrib", "isha"];
 // original static-JSON build and was making an unprotected extra DB call
 // (bypassing the retry/stale-cache fallback) on every single visit.
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/masjids/[id]">): Promise<Metadata> {
+  const { id } = await params;
+  const { masjid } = await getMasjidByIdWithFallback(id);
+  if (!masjid) return {};
+
+  const title = `${masjid.name} — Prayer Timings | Qareeb`;
+  const description = `Jamaat timings for ${masjid.name}, ${masjid.area}, ${masjid.city}. Fajr ${masjid.timings.fajr}, Dhuhr ${masjid.timings.zohar}, Asr ${masjid.timings.asr}, Maghrib ${masjid.timings.maghrib}, Isha ${masjid.timings.isha}.`;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description },
+  };
+}
 
 export default async function MasjidDetailPage({
   params,
@@ -68,12 +86,16 @@ export default async function MasjidDetailPage({
         {ROW_ORDER.map((name) => (
           <div key={name} className="flex items-center justify-between px-4 py-3">
             <span className="text-sm">{dict.prayerLabels[name]}</span>
-            <span className="text-sm font-medium">{masjid.timings[name]}</span>
+            <span className="text-sm font-medium">
+              <bdi>{masjid.timings[name]}</bdi>
+            </span>
           </div>
         ))}
         <div className="flex items-center justify-between px-4 py-3">
           <span className="text-sm">{dict.prayerFilterLabels.jummah}</span>
-          <span className="text-sm font-medium">{masjid.timings.jummah}</span>
+          <span className="text-sm font-medium">
+            <bdi>{masjid.timings.jummah}</bdi>
+          </span>
         </div>
       </section>
 

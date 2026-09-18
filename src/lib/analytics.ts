@@ -135,9 +135,9 @@ export type DailyTrendPoint = { day: string; pageviews: number; uniqueVisitors: 
 
 export async function getDailyTrend(days = 30): Promise<DailyTrendPoint[]> {
   const rows = (await sql()`
-    select day, pageviews, unique_visitors
+    select day::text as day, pageviews, unique_visitors
     from daily_stats
-    where day >= current_date - ${days - 1}
+    where day >= current_date - ${days - 1}::int
     order by day asc
   `) as { day: string; pageviews: number; unique_visitors: number }[];
 
@@ -172,7 +172,7 @@ export async function getAnalyticsTotals(days = 30): Promise<AnalyticsTotals> {
         coalesce(sum(pageviews), 0) as pageviews,
         coalesce(sum(unique_visitors), 0) as unique_visitors
       from daily_stats
-      where day >= current_date - ${days - 1}
+      where day >= current_date - ${days - 1}::int
     `,
     sql()`select coalesce(sum(view_count), 0) as total from masjids`,
   ]) as [{ pageviews: number; unique_visitors: number }[], { total: number }[]];
@@ -203,7 +203,7 @@ export async function getTopReferrers(days = 30, limit = 10): Promise<ReferrerCo
   const rows = (await sql()`
     select referrer_host, sum(visits) as visits
     from referrer_stats
-    where day >= current_date - ${days - 1}
+    where day >= current_date - ${days - 1}::int
     group by referrer_host
     order by visits desc
     limit ${limit}
@@ -217,7 +217,7 @@ export async function getDeviceSplit(days = 30): Promise<DeviceCount[]> {
   const rows = (await sql()`
     select device_type, sum(visits) as visits
     from device_stats
-    where day >= current_date - ${days - 1}
+    where day >= current_date - ${days - 1}::int
     group by device_type
     order by device_type asc
   `) as { device_type: string; visits: number }[];

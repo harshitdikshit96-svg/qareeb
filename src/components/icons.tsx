@@ -46,9 +46,17 @@ export function DirectionIcon({ size = 14 }: { size?: number }) {
   );
 }
 
-export function BackIcon({ size = 16 }: { size?: number }) {
+export function BackIcon({ size = 16, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className={`rtl:-scale-x-100 ${className}`}
+    >
       <path d="m15 6-6 6 6 6" />
     </svg>
   );
