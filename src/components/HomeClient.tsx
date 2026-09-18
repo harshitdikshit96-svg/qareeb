@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import InstallPrompt from "@/components/InstallPrompt";
 import MasjidCard from "@/components/MasjidCard";
 import NextPrayerBanner from "@/components/NextPrayerBanner";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import StaleBanner from "@/components/StaleBanner";
+import { useDictionary } from "@/lib/i18n/LocaleContext";
 import { getAreas, sortByDistance, withDistances } from "@/lib/masjids";
 import { useGeolocation } from "@/lib/useGeolocation";
 import type { Masjid } from "@/lib/types";
@@ -21,6 +23,7 @@ export default function HomeClient({
 }) {
   const [query, setQuery] = useState("");
   const { coords, status, place } = useGeolocation();
+  const dict = useDictionary();
 
   const areas = useMemo(() => getAreas(masjids), [masjids]);
 
@@ -41,6 +44,7 @@ export default function HomeClient({
 
   return (
     <div className="px-4 pt-6 pb-4 space-y-5">
+      <InstallPrompt />
       {stale && <StaleBanner fetchedAt={fetchedAt} />}
       <header
         className="relative overflow-hidden rounded-3xl p-5 space-y-3 bg-cover bg-center"
@@ -52,17 +56,15 @@ export default function HomeClient({
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative">
           <h1 className="text-3xl font-semibold leading-tight text-white">
-            Assalamu
+            {dict.home.greetingLine1}
             <br />
-            Alaikum
+            {dict.home.greetingLine2}
           </h1>
-          <p className="text-white/80 text-sm mt-2">
-            Find nearby masjids and never miss a Salah.
-          </p>
+          <p className="text-white/80 text-sm mt-2">{dict.home.tagline}</p>
         </div>
         <div className="relative inline-flex items-center gap-1.5 bg-card border border-black/10 rounded-full px-3.5 py-1.5 text-sm">
           <PinIcon />
-          Lucknow, India
+          {dict.home.locationBadge}
         </div>
       </header>
 
@@ -70,21 +72,20 @@ export default function HomeClient({
         <NextPrayerBanner
           timings={bannerSource.timings}
           sourceLabel={
-            status === "granted" ? `Nearest · ${bannerSource.name}` : bannerSource.name
+            status === "granted"
+              ? `${dict.home.nearestPrefix} · ${bannerSource.name}`
+              : bannerSource.name
           }
         />
       )}
 
       {status === "denied" && (
-        <p className="text-xs text-muted -mt-2">
-          Location access was denied — showing masjids unsorted. Enable location to
-          see distances.
-        </p>
+        <p className="text-xs text-muted -mt-2">{dict.home.locationDenied}</p>
       )}
 
       {status === "granted" && (
         <p className="text-xs text-muted -mt-2">
-          {place ? `Using your location: ${place}` : "Finding your area…"}
+          {place ? dict.home.locationGranted(place) : dict.home.findingArea}
         </p>
       )}
 
@@ -98,9 +99,9 @@ export default function HomeClient({
 
       <section className="space-y-3">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold">Nearby Masjids</h2>
+          <h2 className="font-semibold">{dict.home.nearbyMasjids}</h2>
           <Link href="/masjids" className="text-sm text-brand flex items-center gap-0.5">
-            View all
+            {dict.home.viewAll}
             <ChevronIcon />
           </Link>
         </div>
@@ -111,7 +112,7 @@ export default function HomeClient({
             </div>
           ))}
           {filtered.length === 0 && (
-            <p className="text-sm text-muted py-6">No masjids match your search.</p>
+            <p className="text-sm text-muted py-6">{dict.common.noMasjidsMatch}</p>
           )}
         </div>
       </section>

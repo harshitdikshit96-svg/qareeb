@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import TimingsForm from "@/components/admin/TimingsForm";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getLocale } from "@/lib/i18n/locale";
 import { getMasjidByIdFromDb } from "@/lib/masjidsDb";
 import { getRecentTimingChanges } from "@/lib/masjidAdminsDb";
 import { masjidAdminLogoutAction, updateOwnMasjidTimingsAction } from "@/lib/masjidAdminActions";
@@ -14,6 +16,8 @@ export default async function MasjidAdminDashboard({
 }) {
   const session = await requireMasjidAdminSession();
   const { saved } = await searchParams;
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
 
   const masjid = await getMasjidByIdFromDb(session.masjidId);
   if (!masjid) notFound();
@@ -26,31 +30,40 @@ export default async function MasjidAdminDashboard({
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <h1 className="text-lg font-semibold truncate">{masjid.name}</h1>
-            <p className="text-xs text-neutral-500">Signed in as {session.username}</p>
+            <p className="text-xs text-neutral-500">
+              {dict.masjidAdmin.signedInAs} {session.username}
+            </p>
           </div>
           <form action={masjidAdminLogoutAction}>
             <button
               type="submit"
               className="shrink-0 rounded-lg border border-black/10 text-sm px-3 py-2"
             >
-              Log out
+              {dict.masjidAdmin.logOut}
             </button>
           </form>
         </div>
 
         {saved && (
           <p className="text-sm text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2">
-            Timings updated.
+            {dict.masjidAdmin.timingsUpdated}
           </p>
         )}
 
         <div className="bg-white rounded-2xl border border-black/5 p-6">
-          <TimingsForm timings={masjid.timings} action={updateOwnMasjidTimingsAction} />
+          <TimingsForm
+            timings={masjid.timings}
+            action={updateOwnMasjidTimingsAction}
+            labels={dict.timingFieldLabels}
+            saveLabel={dict.masjidAdmin.saveTimings}
+          />
         </div>
 
         {changes.length > 0 && (
           <div className="bg-white rounded-2xl border border-black/5 p-4">
-            <p className="text-xs font-medium text-neutral-500 mb-2">Recent changes</p>
+            <p className="text-xs font-medium text-neutral-500 mb-2">
+              {dict.masjidAdmin.recentChanges}
+            </p>
             <div className="space-y-1.5">
               {changes.map((c) => (
                 <p key={c.id} className="text-xs text-neutral-500">

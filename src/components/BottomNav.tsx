@@ -2,15 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { ReactElement } from "react";
+import { useDictionary } from "@/lib/i18n/LocaleContext";
 
-const items = [
-  { href: "/", label: "Home", icon: HomeIcon },
-  { href: "/masjids", label: "Masjids", icon: DomeIcon },
-  { href: "/bookmarks", label: "Bookmarks", icon: BookmarkIcon },
-];
+type NavIcon = () => ReactElement;
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const dict = useDictionary();
+
+  const items = [
+    { href: "/", label: dict.nav.home, icon: HomeIcon },
+    { href: "/masjids", label: dict.nav.masjids, icon: DomeIcon },
+    { href: "/bookmarks", label: dict.nav.bookmarks, icon: BookmarkIcon },
+  ];
 
   return (
     <nav className="fixed bottom-0 inset-x-0 z-20 bg-card border-t border-black/5">
@@ -27,7 +32,7 @@ function NavItem({
   item,
   active,
 }: {
-  item: (typeof items)[number];
+  item: { href: string; label: string; icon: NavIcon };
   active: boolean;
 }) {
   const Icon = item.icon;
@@ -69,4 +74,3 @@ function BookmarkIcon() {
     </svg>
   );
 }
-

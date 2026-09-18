@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useDictionary } from "@/lib/i18n/LocaleContext";
 
 export default function SearchFilterBar({
   query,
@@ -16,6 +17,7 @@ export default function SearchFilterBar({
   onAreaChange: (area: string | null) => void;
 }) {
   const [showFilters, setShowFilters] = useState(false);
+  const dict = useDictionary();
 
   return (
     <div>
@@ -25,13 +27,13 @@ export default function SearchFilterBar({
           type="text"
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          placeholder="Search masjid near you..."
+          placeholder={dict.search.placeholder}
           className="flex-1 bg-transparent outline-none text-sm placeholder:text-muted"
         />
         <button
           type="button"
           onClick={() => setShowFilters((s) => !s)}
-          aria-label="Toggle area filter"
+          aria-label={dict.search.toggleAreaFilter}
           className={`shrink-0 ${selectedArea ? "text-brand" : "text-muted"}`}
         >
           <FilterIcon />
@@ -49,7 +51,7 @@ export default function SearchFilterBar({
                 : "bg-card text-foreground border-black/10"
             }`}
           >
-            All areas
+            {dict.search.allAreas}
           </button>
           {areas.map((area) => (
             <button

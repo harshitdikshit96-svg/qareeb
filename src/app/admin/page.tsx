@@ -17,6 +17,12 @@ export default async function AdminListPage() {
           </div>
           <div className="flex items-center gap-2">
             <Link
+              href="/admin/analytics"
+              className="rounded-lg border border-black/10 text-sm font-medium px-4 py-2"
+            >
+              Analytics
+            </Link>
+            <Link
               href="/admin/new"
               className="rounded-lg bg-emerald-700 text-white text-sm font-medium px-4 py-2"
             >

@@ -5,6 +5,7 @@ import MasjidCard from "@/components/MasjidCard";
 import SearchFilterBar from "@/components/SearchFilterBar";
 import SortToggle, { type SortMode } from "@/components/SortToggle";
 import StaleBanner from "@/components/StaleBanner";
+import { useDictionary } from "@/lib/i18n/LocaleContext";
 import { getAreas, sortByDistance, withDistances } from "@/lib/masjids";
 import { getNextPrayer } from "@/lib/prayer";
 import { useGeolocation } from "@/lib/useGeolocation";
@@ -32,6 +33,7 @@ export default function MasjidsListClient({
   const [area, setArea] = useState<string | null>(null);
   const [sortMode, setSortMode] = useState<SortMode>("distance");
   const { coords, status } = useGeolocation();
+  const dict = useDictionary();
 
   const areas = useMemo(() => getAreas(masjids), [masjids]);
 
@@ -62,13 +64,13 @@ export default function MasjidsListClient({
       {stale && <StaleBanner fetchedAt={fetchedAt} />}
       <header className="flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold">All Masjids</h1>
+          <h1 className="text-2xl font-semibold">{dict.masjidsList.title}</h1>
           <p className="text-muted text-sm mt-1">
             {sortMode === "distance"
               ? status === "granted"
-                ? "Sorted by distance from you"
-                : "Enable location to sort by distance"
-              : "Sorted by nearest upcoming jamaat"}
+                ? dict.masjidsList.sortedByDistance
+                : dict.masjidsList.enableLocationToSort
+              : dict.masjidsList.sortedByNextJamaat}
           </p>
         </div>
       </header>
@@ -93,7 +95,7 @@ export default function MasjidsListClient({
         ))}
         {filtered.length === 0 && (
           <p className="col-span-2 text-sm text-muted py-6 text-center">
-            No masjids match your search.
+            {dict.common.noMasjidsMatch}
           </p>
         )}
       </div>

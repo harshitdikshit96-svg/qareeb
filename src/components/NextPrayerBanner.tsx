@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatCountdown, getNextPrayer, PRAYER_LABELS } from "@/lib/prayer";
+import { useDictionary } from "@/lib/i18n/LocaleContext";
+import { formatCountdown, getNextPrayer } from "@/lib/prayer";
 import type { PrayerName, PrayerTimes } from "@/lib/types";
 
 const ROW_ORDER: PrayerName[] = ["fajr", "zohar", "asr", "maghrib", "isha"];
@@ -14,6 +15,7 @@ export default function NextPrayerBanner({
   sourceLabel?: string;
 }) {
   const [now, setNow] = useState<Date | null>(null);
+  const dict = useDictionary();
 
   useEffect(() => {
     const tick = () => setNow(new Date());
@@ -37,16 +39,14 @@ export default function NextPrayerBanner({
     <div className="rounded-3xl bg-brand text-white p-5 shadow-lg">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-white/70 text-sm">
-            Next Prayer{sourceLabel ? ` · ${sourceLabel}` : ""}
-          </p>
+          <p className="text-white/70 text-sm">{dict.nextPrayerBanner.nextPrayer(sourceLabel)}</p>
           {next && (
             <>
-              <p className="text-3xl font-semibold mt-1">{next.label}</p>
+              <p className="text-3xl font-semibold mt-1">{dict.prayerLabels[next.name]}</p>
               <p className="text-xl text-white/90 mt-0.5">{next.timeLabel}</p>
               <p className="flex items-center gap-1.5 text-sm text-white/70 mt-2">
                 <ClockIcon />
-                {formatCountdown(next.remainingMs)} remaining
+                {dict.nextPrayerBanner.remaining(formatCountdown(next.remainingMs))}
               </p>
             </>
           )}
@@ -58,10 +58,8 @@ export default function NextPrayerBanner({
           className="flex flex-col items-center justify-center gap-1 bg-white/10 hover:bg-white/15 transition-colors rounded-2xl px-4 py-3 text-sm shrink-0"
         >
           <CompassIcon />
-          <span className="text-center leading-tight">
-            Qibla
-            <br />
-            Finder
+          <span className="text-center leading-tight whitespace-pre-line">
+            {dict.nextPrayerBanner.qiblaFinder.replace(" ", "\n")}
           </span>
         </a>
       </div>
@@ -76,7 +74,7 @@ export default function NextPrayerBanner({
                 isActive ? "bg-white text-brand font-semibold" : "text-white/80"
               }`}
             >
-              <span>{PRAYER_LABELS[name]}</span>
+              <span>{dict.prayerLabels[name]}</span>
               <span className="text-[11px]">{timings[name]}</span>
             </div>
           );

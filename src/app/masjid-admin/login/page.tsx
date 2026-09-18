@@ -1,3 +1,5 @@
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getLocale } from "@/lib/i18n/locale";
 import { masjidAdminLoginAction } from "@/lib/masjidAdminActions";
 
 export default async function MasjidAdminLoginPage({
@@ -6,6 +8,8 @@ export default async function MasjidAdminLoginPage({
   searchParams: Promise<{ error?: string; next?: string }>;
 }) {
   const { error, next } = await searchParams;
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-neutral-100 px-4">
@@ -14,17 +18,15 @@ export default async function MasjidAdminLoginPage({
         className="bg-white rounded-2xl shadow-sm border border-black/5 p-6 w-full max-w-sm space-y-4"
       >
         <div>
-          <h1 className="text-xl font-semibold">Masjid Admin</h1>
-          <p className="text-sm text-neutral-500 mt-1">
-            Sign in to update your masjid&apos;s prayer timings.
-          </p>
+          <h1 className="text-xl font-semibold">{dict.masjidAdmin.loginTitle}</h1>
+          <p className="text-sm text-neutral-500 mt-1">{dict.masjidAdmin.loginSubtitle}</p>
         </div>
 
         <input type="hidden" name="next" value={next ?? "/masjid-admin"} />
 
         <div className="space-y-1">
           <label htmlFor="username" className="text-sm font-medium">
-            Username
+            {dict.masjidAdmin.username}
           </label>
           <input
             id="username"
@@ -40,18 +42,18 @@ export default async function MasjidAdminLoginPage({
 
         <div className="space-y-1">
           <label htmlFor="password" className="text-sm font-medium">
-            Password
+            {dict.masjidAdmin.password}
           </label>
           <input id="password" name="password" type="password" required className="input" />
         </div>
 
-        {error && <p className="text-sm text-red-600">Incorrect username or password.</p>}
+        {error && <p className="text-sm text-red-600">{dict.masjidAdmin.incorrectCredentials}</p>}
 
         <button
           type="submit"
           className="w-full rounded-lg bg-emerald-700 text-white py-2 text-sm font-medium"
         >
-          Sign in
+          {dict.masjidAdmin.signIn}
         </button>
       </form>
     </div>

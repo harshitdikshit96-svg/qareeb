@@ -1,11 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cookies, headers } from "next/headers";
+import { after } from "next/server";
 import MasjidGallery from "@/components/MasjidGallery";
 import { BackIcon, DirectionIcon } from "@/components/icons";
 import StaleBanner from "@/components/StaleBanner";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getLocale } from "@/lib/i18n/locale";
 import { googleMapsDirectionsUrl } from "@/lib/masjids";
 import { getMasjidByIdWithFallback } from "@/lib/masjidsRepo";
-import { PRAYER_LABELS } from "@/lib/prayer";
+import { recordVisit } from "@/lib/analytics";
+import { VISITOR_COOKIE_NAME } from "@/lib/visitorCookie";
 import type { PrayerName } from "@/lib/types";
 
 const ROW_ORDER: PrayerName[] = ["fajr", "zohar", "asr", "maghrib", "isha"];
@@ -20,15 +25,26 @@ export default async function MasjidDetailPage({
   params,
 }: PageProps<"/masjids/[id]">) {
   const { id } = await params;
-  const { masjid, stale } = await getMasjidByIdWithFallback(id);
+  const [{ masjid, stale }, locale] = await Promise.all([
+    getMasjidByIdWithFallback(id),
+    getLocale(),
+  ]);
   if (!masjid) notFound();
+  const dict = getDictionary(locale);
+
+  const [cookieStore, hdrs] = await Promise.all([cookies(), headers()]);
+  const visitorId = cookieStore.get(VISITOR_COOKIE_NAME)?.value ?? null;
+  const referrer = hdrs.get("referer");
+  const userAgent = hdrs.get("user-agent");
+  const host = hdrs.get("host");
+  after(() => recordVisit({ visitorId, masjidId: id, referrer, userAgent, host }));
 
   return (
     <div className="px-4 pt-6 pb-4 space-y-5">
       {stale && <StaleBanner fetchedAt={null} />}
       <Link href="/masjids" className="inline-flex items-center gap-1 text-sm text-muted">
         <BackIcon size={16} />
-        All Masjids
+        {dict.common.allMasjids}
       </Link>
 
       <MasjidGallery images={masjid.images} alt={masjid.name} />
@@ -45,33 +61,27 @@ export default async function MasjidDetailPage({
         className="flex items-center justify-center gap-2 bg-brand text-white rounded-2xl py-3 text-sm font-medium"
       >
         <DirectionIcon size={16} />
-        Get Directions
+        {dict.masjidDetail.getDirections}
       </a>
 
       <section className="bg-card rounded-2xl border border-black/5 divide-y divide-black/5">
         {ROW_ORDER.map((name) => (
           <div key={name} className="flex items-center justify-between px-4 py-3">
-            <span className="text-sm">{PRAYER_LABELS[name]}</span>
+            <span className="text-sm">{dict.prayerLabels[name]}</span>
             <span className="text-sm font-medium">{masjid.timings[name]}</span>
           </div>
         ))}
         <div className="flex items-center justify-between px-4 py-3">
-          <span className="text-sm">Jumu&apos;ah</span>
+          <span className="text-sm">{dict.prayerFilterLabels.jummah}</span>
           <span className="text-sm font-medium">{masjid.timings.jummah}</span>
         </div>
       </section>
 
       {masjid.geoPrecision === "locality" && (
-        <p className="text-xs text-muted">
-          Location shown is approximate (locality-level), pending exact
-          verification.
-        </p>
+        <p className="text-xs text-muted">{dict.masjidDetail.approximateLocation}</p>
       )}
 
-      <p className="text-xs text-muted">
-        Timings last updated {masjid.lastUpdated}. Report a correction if you
-        notice an error.
-      </p>
+      <p className="text-xs text-muted">{dict.masjidDetail.lastUpdated(masjid.lastUpdated)}</p>
     </div>
   );
 }

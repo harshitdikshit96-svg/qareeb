@@ -1,5 +1,7 @@
 "use client";
 
+import { useDictionary } from "@/lib/i18n/LocaleContext";
+
 export type SortMode = "distance" | "prayer";
 
 export default function SortToggle({
@@ -11,9 +13,11 @@ export default function SortToggle({
   onChange: (mode: SortMode) => void;
   distanceDisabled?: boolean;
 }) {
+  const dict = useDictionary();
+
   return (
     <div className="flex items-center gap-2 text-xs">
-      <span className="text-muted">Sort by</span>
+      <span className="text-muted">{dict.sortToggle.sortBy}</span>
       <div className="inline-flex rounded-full border border-black/10 bg-card p-0.5">
         <button
           type="button"
@@ -23,7 +27,7 @@ export default function SortToggle({
             value === "distance" ? "bg-brand text-white" : "text-foreground"
           }`}
         >
-          Distance
+          {dict.sortToggle.distance}
         </button>
         <button
           type="button"
@@ -32,7 +36,7 @@ export default function SortToggle({
             value === "prayer" ? "bg-brand text-white" : "text-foreground"
           }`}
         >
-          Next Jamaat
+          {dict.sortToggle.nextJamaat}
         </button>
       </div>
     </div>

@@ -27,6 +27,14 @@ body {
   color: var(--foreground);
 }
 
+html[lang="hi"] body {
+  font-family: var(--font-hindi), var(--font-geist-sans), sans-serif;
+}
+
+html[lang="ur"] body {
+  font-family: var(--font-urdu), var(--font-geist-sans), sans-serif;
+}
+
 .input {
   width: 100%;
   border-radius: 0.5rem;

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import ImageCarousel from "@/components/ImageCarousel";
 import { MosqueIcon, HeartIcon, DirectionIcon } from "@/components/icons";
+import { useDictionary } from "@/lib/i18n/LocaleContext";
 import { cloudinaryUrl } from "@/lib/cloudinaryUrl";
 import { isBookmarked, toggleBookmark } from "@/lib/bookmarks";
 import { formatDistance } from "@/lib/distance";
@@ -13,6 +14,7 @@ import type { MasjidWithDistance } from "@/lib/types";
 
 export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
   const [bookmarked, setBookmarked] = useState(false);
+  const dict = useDictionary();
   const next = getNextPrayer(masjid.timings);
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
         <button
           type="button"
           onClick={() => setBookmarked(toggleBookmark(masjid.id))}
-          aria-label={bookmarked ? "Remove bookmark" : "Add bookmark"}
+          aria-label={bookmarked ? dict.masjidCard.removeBookmark : dict.masjidCard.addBookmark}
           className="absolute z-10 top-2 right-2 h-7 w-7 rounded-full bg-white/90 flex items-center justify-center"
         >
           <HeartIcon filled={bookmarked} />
@@ -60,14 +62,14 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
         <div className="flex items-center justify-between mt-2.5">
           {next && (
             <span className="text-xs text-brand font-medium">
-              Next: {next.label} {next.timeLabel}
+              {dict.masjidCard.next(dict.prayerLabels[next.name], next.timeLabel)}
             </span>
           )}
           <a
             href={googleMapsDirectionsUrl(masjid)}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Get directions"
+            aria-label={dict.masjidCard.getDirections}
             className="relative z-10 h-7 w-7 rounded-full bg-brand/10 text-brand flex items-center justify-center shrink-0"
           >
             <DirectionIcon />
@@ -82,4 +84,3 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
     </div>
   );
 }
-
