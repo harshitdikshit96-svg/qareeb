@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnalyticsTrendChart from "@/components/admin/AnalyticsTrendChart";
 import {
   getAnalyticsTotals,
   getDailyTrend,
@@ -9,6 +10,13 @@ import {
 
 export const dynamic = "force-dynamic";
 
+// Validated pair (dataviz skill, blue/orange slots) — kept distinct from the
+// trend chart's aqua/yellow so the two charts don't imply a shared meaning.
+const DEVICE_COLORS: Record<string, string> = {
+  mobile: "#2a78d6",
+  desktop: "#eb6834",
+};
+
 export default async function AdminAnalyticsPage() {
   const [totals, trend, topMasjids, referrers, devices] = await Promise.all([
     getAnalyticsTotals(30),
@@ -18,7 +26,6 @@ export default async function AdminAnalyticsPage() {
     getDeviceSplit(30),
   ]);
 
-  const maxTrendValue = Math.max(1, ...trend.map((d) => d.pageviews));
   const totalDeviceVisits = devices.reduce((sum, d) => sum + d.visits, 0);
 
   return (
@@ -48,24 +55,7 @@ export default async function AdminAnalyticsPage() {
 
         <div className="bg-white rounded-2xl border border-black/5 p-5">
           <p className="text-sm font-medium mb-3">Daily pageviews</p>
-          <div className="flex items-end gap-1 h-32">
-            {trend.map((d) => (
-              <div
-                key={d.day}
-                className="flex-1 h-full flex flex-col items-center justify-end gap-1"
-                title={`${d.day}: ${d.pageviews} pageviews, ${d.uniqueVisitors} unique`}
-              >
-                <div
-                  className="w-full rounded-t bg-emerald-600/80"
-                  style={{ height: `${Math.max(4, (d.pageviews / maxTrendValue) * 100)}%` }}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between text-[10px] text-neutral-400 mt-2">
-            <span>{trend[0]?.day}</span>
-            <span>{trend[trend.length - 1]?.day}</span>
-          </div>
+          <AnalyticsTrendChart data={trend} />
         </div>
 
         <div className="bg-white rounded-2xl border border-black/5 divide-y divide-black/5">
@@ -105,18 +95,27 @@ export default async function AdminAnalyticsPage() {
             <p className="text-sm font-medium mb-2">Device split (30d)</p>
             {totalDeviceVisits > 0 ? (
               <div className="space-y-2">
-                <div className="h-2 rounded-full bg-neutral-100 overflow-hidden flex">
+                <div className="h-2 rounded-full bg-neutral-100 flex gap-0.5 overflow-hidden">
                   {devices.map((d) => (
                     <div
                       key={d.deviceType}
-                      className={d.deviceType === "mobile" ? "bg-emerald-600" : "bg-amber-500"}
-                      style={{ width: `${(d.visits / totalDeviceVisits) * 100}%` }}
+                      className="rounded-full"
+                      style={{
+                        width: `${(d.visits / totalDeviceVisits) * 100}%`,
+                        backgroundColor: DEVICE_COLORS[d.deviceType] ?? "#898781",
+                      }}
                     />
                   ))}
                 </div>
                 {devices.map((d) => (
                   <div key={d.deviceType} className="flex items-center justify-between text-sm">
-                    <span className="text-neutral-600 capitalize">{d.deviceType}</span>
+                    <span className="flex items-center gap-2 text-neutral-600 capitalize">
+                      <span
+                        className="inline-block w-2.5 h-2.5 rounded-full shrink-0"
+                        style={{ backgroundColor: DEVICE_COLORS[d.deviceType] ?? "#898781" }}
+                      />
+                      {d.deviceType}
+                    </span>
                     <span className="font-medium">
                       {((d.visits / totalDeviceVisits) * 100).toFixed(0)}%
                     </span>
