@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "in.qareeb.twa",
+      "sha256_cert_fingerprints": [
+        "71:1E:16:A3:D5:F8:A1:35:5F:A8:E8:5A:1C:16:84:09:C4:A2:E1:22:A2:EA:F7:17:42:72:53:A1:34:EA:A9:A4"
+      ]
+    }
+  }
+]

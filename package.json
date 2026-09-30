@@ -9,7 +9,9 @@
     "lint": "eslint",
     "geocode:masjids": "node scripts/geocode-masjids.mjs",
     "db:migrate": "node --env-file=.env.local scripts/migrate.mjs",
-    "db:seed": "node --env-file=.env.local scripts/seed-masjids.mjs"
+    "db:seed": "node --env-file=.env.local scripts/seed-masjids.mjs",
+    "analytics:check": "node --env-file=.env.local scripts/check-analytics.mjs",
+    "analytics:reset": "node --env-file=.env.local scripts/reset-analytics.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

@@ -12,8 +12,20 @@ import { sql } from "./db";
 const BOT_UA_PATTERN = /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|telegrambot|preview|headless/i;
 const MOBILE_UA_PATTERN = /Mobi|Android|iPhone|iPad|iPod/i;
 
+// Matches the *current request's* Host header — "localhost:3000",
+// "127.0.0.1:3000", a LAN IP during `npm run dev`, etc. — so that our own
+// local testing never gets written into the same production counters
+// real visitors land in. This is a direct header check rather than a
+// cookie: it's exact (a cookie can't tell dev from prod any more reliably
+// than the host itself already does) and works even with cookies blocked.
+const LOCAL_HOST_PATTERN = /^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\]|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3})(:\d+)?$/i;
+
 function isLikelyBot(userAgent: string | null): boolean {
   return !!userAgent && BOT_UA_PATTERN.test(userAgent);
+}
+
+function isLocalHost(host: string | null): boolean {
+  return !!host && LOCAL_HOST_PATTERN.test(host);
 }
 
 function isMobile(userAgent: string | null): boolean {
@@ -41,7 +53,7 @@ export type VisitInput = {
 
 export async function recordVisit(input: VisitInput): Promise<void> {
   try {
-    if (isLikelyBot(input.userAgent)) return;
+    if (isLikelyBot(input.userAgent) || isLocalHost(input.host)) return;
 
     const client = sql();
     const today = new Date().toISOString().slice(0, 10);

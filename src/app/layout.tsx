@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Noto_Nastaliq_Urdu, Noto_Sans_Devanagari } from "next/font/google";
+import Link from "next/link";
 import BottomNav from "@/components/BottomNav";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
@@ -75,7 +76,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <div className="px-4 pt-6">
               <LanguageSwitcher />
             </div>
-            <p className="px-4 pt-4 pb-2 text-center text-[11px] text-muted">
+            <p className="px-4 pt-4 text-center text-[11px] text-muted">
               {dict.footer.credit}{" "}
               <a
                 href="https://harshitcreates.in"
@@ -85,6 +86,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               >
                 harshitcreates.in
               </a>
+            </p>
+            <p className="px-4 pt-1 pb-2 text-center text-[11px] text-muted">
+              <Link href="/privacy" className="underline">
+                Privacy Policy
+              </Link>
             </p>
           </div>
           <BottomNav />

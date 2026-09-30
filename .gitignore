@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# TWA (Android) signing keystore — never commit. Play Store requires the
+# exact same file to sign every future app update.
+/twa/*.keystore
+/twa/*.keystore.old
+/twa/KEYSTORE_CREDENTIALS.txt
+/twa/android.keystore.properties
+
+# local Claude Code/Cowork tool settings
+.claude/
