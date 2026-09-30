@@ -49,3 +49,6 @@ next-env.d.ts
 
 # local Claude Code/Cowork tool settings
 .claude/
+
+# Bubblewrap-generated Android project (regenerate with `bubblewrap update`)
+/twa/android/
