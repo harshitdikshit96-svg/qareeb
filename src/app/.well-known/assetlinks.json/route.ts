@@ -20,6 +20,7 @@ const ASSET_LINKS = [
       package_name: "com.qareeb.twa",
       sha256_cert_fingerprints: [
         "71:1E:16:A3:D5:F8:A1:35:5F:A8:E8:5A:1C:16:84:09:C4:A2:E1:22:A2:EA:F7:17:42:72:53:A1:34:EA:A9:A4",
+        "A1:FC:12:4A:7A:13:4A:6A:87:E2:ED:A3:F1:C9:57:F6:EC:C8:84:21:B9:4D:7A:F1:59:0A:61:12:8E:D5:CC:30",
       ],
     },
   },

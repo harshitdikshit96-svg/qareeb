@@ -72,11 +72,11 @@ up and ready — run it once you've confirmed assetlinks.json is reachable.
 
 ## Bubblewrap `init` — every prompt, and what to answer
 
-Run this from inside the `twa/` folder (so the keystore path below is just
-`./android-release.keystore`, no need to type a full path):
+Run this from inside `twa/android/` (the generated Android project lives there; the keystore is one level up):
+`../android-release.keystore`. Every later `bubblewrap build` must also run from `twa/android/`.
 
 ```bash
-cd twa
+cd twa/android
 npx @bubblewrap/cli init --manifest=https://www.qareebsalah.com/manifest.webmanifest
 ```
 
@@ -110,7 +110,7 @@ one matches:
   yet.
 - **Enable Play Billing**: answer **No** — not used.
 - **Signing key**: it'll ask for a path — enter
-  `./android-release.keystore` (already sitting right there in this
+  `../android-release.keystore` (sitting in the parent `twa/`
   folder) and alias `qareeb`.
   - "Use this existing key?" → **Yes**.
   - **Key password** / **Keystore password**: both are the same value,
@@ -129,7 +129,7 @@ one matches:
 - **Fallback behavior** (what happens if Chrome/Custom Tabs isn't
   available): accept the default, `customtabs`.
 
-When it finishes, it writes `twa-manifest.json` into the `twa/` folder —
+When it finishes, it writes `twa-manifest.json` into `twa/android/` —
 that's the file `bubblewrap build` reads next, so just run `npx
 @bubblewrap/cli build` from the same directory afterward.
 
