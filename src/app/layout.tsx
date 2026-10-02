@@ -79,7 +79,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <p className="px-4 pt-4 text-center text-[11px] text-muted">
               {dict.footer.credit}{" "}
               <a
-                href="https://harshitcreates.in"
+                href="https://www.harshitcreates.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline"

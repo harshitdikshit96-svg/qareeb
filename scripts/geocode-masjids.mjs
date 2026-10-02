@@ -19,7 +19,7 @@ const DATA_PATH = path.join(ROOT, "data", "masjids.json");
 const CACHE_PATH = path.join(ROOT, "data", "geocode-cache.json");
 const CANDIDATES_PATH = path.join(ROOT, "data", "osm-mosque-candidates.json");
 
-const USER_AGENT = "Qareeb-MasjidFinder/0.1 (+mailto:dixitharshit00z@gmail.com)";
+const USER_AGENT = "Qareeb-MasjidFinder/0.1 (+mailto:faizkhan2293@outlook.com)";
 const SLEEP_MS = 1100; // Nominatim: max 1 request/second
 
 const WORSHIP_TYPES = new Set(["place_of_worship", "mosque"]);
