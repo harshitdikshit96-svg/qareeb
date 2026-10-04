@@ -90,8 +90,8 @@ export default function MasjidsListClient({
       />
 
       <div className="grid grid-cols-2 gap-3">
-        {filtered.map((m) => (
-          <MasjidCard key={m.id} masjid={m} />
+        {filtered.map((m, i) => (
+          <MasjidCard key={m.id} masjid={m} priority={i === 0} />
         ))}
         {filtered.length === 0 && (
           <p className="col-span-2 text-sm text-muted py-6 text-center">

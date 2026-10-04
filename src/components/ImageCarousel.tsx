@@ -48,6 +48,13 @@ export default function ImageCarousel({
         src={images[safeIndex]}
         alt={alt}
         loading={priority && safeIndex === 0 ? "eager" : "lazy"}
+        // fetchPriority tells the browser's preload scanner this is the
+        // one image worth racing ahead of everything else — the gap
+        // between "eager" and this was most of the LCP delay: eager alone
+        // still queues behind the browser's default (auto/low) priority
+        // for images discovered this late in a client-rendered list.
+        fetchPriority={priority && safeIndex === 0 ? "high" : "auto"}
+        decoding={priority && safeIndex === 0 ? "sync" : "async"}
         onClick={
           onImageClick
             ? (e) => {

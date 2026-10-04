@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import InstallPrompt from "@/components/InstallPrompt";
@@ -47,12 +48,42 @@ export default function HomeClient({
       <InstallPrompt />
       {stale && <StaleBanner fetchedAt={fetchedAt} />}
       <header
-        className="relative overflow-hidden rounded-3xl p-5 space-y-3 bg-cover bg-center"
+        className="relative overflow-hidden rounded-3xl p-5 space-y-3"
         style={{
-          backgroundImage:
-            "url('/images/hero-bg.png'), linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%)",
+          // Gradient-only fallback now — it's what paints instantly behind
+          // the <Image> below while that loads, instead of being layered
+          // underneath a second (invisible-to-the-browser) background
+          // image request.
+          backgroundImage: "linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 100%)",
         }}
       >
+        {/* This was a CSS background-image before, which is exactly the
+            anti-pattern that was causing the slow LCP: Chrome DOES count a
+            background-image as an LCP candidate (it isn't invisible to the
+            metric), but fetchpriority/loading hints can ONLY be set on a
+            real <img>/<link> element, never via the style attribute — so a
+            background-image can never be told to load eagerly or with
+            priority, no matter what else on the page changes. A real
+            next/image here also gets an automatic WebP re-encode (the
+            source PNG was 322 KiB for a 643x360 image) plus a priority
+            preload tag, instead of shipping the raw PNG as-is. */}
+        <Image
+          src="/images/hero-bg.png"
+          alt=""
+          aria-hidden="true"
+          fill
+          // NOT `priority` (deprecated in Next 16 in favor of `preload`) and
+          // NOT `preload` either — Next's own docs say explicitly: when you
+          // want fetchPriority, use loading="eager" + fetchPriority="high"
+          // directly rather than preload. This is also what Lighthouse's
+          // "LCP request discovery" audit checks for specifically: a plain
+          // preload link without fetchpriority="high" set on the <img>
+          // itself still fails that check.
+          loading="eager"
+          fetchPriority="high"
+          sizes="(min-width: 448px) 448px, 100vw"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative">
           <h1 className="text-3xl font-semibold leading-tight text-white">
@@ -106,9 +137,15 @@ export default function HomeClient({
           </Link>
         </div>
         <div className="flex gap-3 overflow-x-auto -mx-4 px-4 pb-1 snap-x scroll-pl-4 scroll-pr-4">
-          {filtered.slice(0, 6).map((m) => (
+          {filtered.slice(0, 6).map((m, i) => (
             <div key={m.id} className="snap-start snap-always w-64 shrink-0">
-              <MasjidCard masjid={m} />
+              {/* Only the first card's image is almost certainly the page's
+                  LCP element (first visible photo, above the fold). Every
+                  card's image was defaulting to loading="lazy" — including
+                  this one — which was the actual LCP root cause: the
+                  browser's lazy-load scheduler was deferring the fetch of
+                  the very image Lighthouse was measuring LCP against. */}
+              <MasjidCard masjid={m} priority={i === 0} />
             </div>
           ))}
           {filtered.length === 0 && (

@@ -12,7 +12,17 @@ import { googleMapsDirectionsUrl } from "@/lib/masjids";
 import { getNextPrayer } from "@/lib/prayer";
 import type { MasjidWithDistance } from "@/lib/types";
 
-export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
+export default function MasjidCard({
+  masjid,
+  priority = false,
+}: {
+  masjid: MasjidWithDistance;
+  // Only the single masjid card most likely to be the page's LCP element
+  // (the first card above the fold) should pass true here — see
+  // ImageCarousel's `priority` prop and the skill note on exactly one
+  // priority image per page.
+  priority?: boolean;
+}) {
   const [bookmarked, setBookmarked] = useState(false);
   const dict = useDictionary();
   const next = getNextPrayer(masjid.timings);
@@ -36,6 +46,7 @@ export default function MasjidCard({ masjid }: { masjid: MasjidWithDistance }) {
             alt={masjid.name}
             arrowSize="h-6 w-6"
             showDots={false}
+            priority={priority}
           />
         ) : (
           <MosqueIcon />
