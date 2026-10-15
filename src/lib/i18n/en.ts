@@ -41,6 +41,8 @@ const en: Dictionary = {
     locationBadge: "Lucknow, India",
     locationDenied:
       "Location access was denied — showing masjids unsorted. Enable location to see distances.",
+    locationUnavailable:
+      "Couldn't get your location yet — make sure device Location (GPS) is on. Showing masjids unsorted for now.",
     locationGranted: (place: string) => `Using your location: ${place}`,
     findingArea: "Finding your area…",
     nearbyMasjids: "Nearby Masjids",

@@ -23,6 +23,7 @@ export interface Dictionary {
     tagline: string;
     locationBadge: string;
     locationDenied: string;
+    locationUnavailable: string;
     locationGranted: (place: string) => string;
     findingArea: string;
     nearbyMasjids: string;

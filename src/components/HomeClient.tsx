@@ -114,6 +114,10 @@ export default function HomeClient({
         <p className="text-xs text-muted -mt-2">{dict.home.locationDenied}</p>
       )}
 
+      {status === "unavailable" && (
+        <p className="text-xs text-muted -mt-2">{dict.home.locationUnavailable}</p>
+      )}
+
       {status === "granted" && (
         <p className="text-xs text-muted -mt-2">
           {place ? dict.home.locationGranted(place) : dict.home.findingArea}
