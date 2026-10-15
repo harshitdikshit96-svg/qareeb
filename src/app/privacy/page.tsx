@@ -77,8 +77,8 @@ export default function PrivacyPolicyPage() {
           <h2 className="font-semibold mb-1">Contact</h2>
           <p>
             Questions about this policy or your data can be sent to{" "}
-            <a href="mailto:faizkhan2293@outlook.com" className="underline">
-              faizkhan2293@outlook.com
+            <a href="mailto:qareebsalah@gmail.com" className="underline">
+              qareebsalah@gmail.com
             </a>
             .
           </p>
